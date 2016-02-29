@@ -5,7 +5,7 @@ The following document describe the deployment of a reliable single node or clus
 
 ## Prerequisites
 
-This document assumes that you have a Kubernetes cluster installed and running, and that you have installed the ```kubectl``` command line tool somewhere in your path.  Please see the [getting started](../../docs/getting-started-guides/) for installation instructions for your platform. We currenly only test on local Linux setup (should replace following '''kubectl''' with '''luster/kubectl.sh''' in kubernetes package directory) and will test on AWS soon.
+This document assumes that you have a Kubernetes cluster installed and running, and that you have installed the ```kubectl``` command line tool somewhere in your path.  Please see the [getting started](../../docs/getting-started-guides/) for installation instructions for your platform. We currenly only test on local Linux setup (should replace following '''kubectl''' with '''cluster/kubectl.sh''' in kubernetes package directory) and will test on AWS soon.
 
 ## Deploy a single HPCC pod
 ### Turning up an HPCC Platform single node
