@@ -151,5 +151,5 @@ kubectl delete -f master-controller.yaml
 ### Known issues
 1. Even create thor containers but thor slaves will try to deployed from the first non-master containers instead of the first thor container. This probably can be fixed by entries in genrules.conf or need wait for HPCC 6.0.0.
 
-
+2. Roxie fails to start in cluster environenment. This is no WMEM_MAX and RMEM_MAX resources in the container environenment. These buffer size setting should be configured on the host system. In HPCC 6.0.0 we will skip the checking on containers and document this. We do need to test network performance and give some guidanse for the buffer size setting on the host.
 
