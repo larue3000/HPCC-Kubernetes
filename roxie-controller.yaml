@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: roxie-controller
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     app: roxie
   template:
@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
       - name: roxie
-        image: "hpccsystems/platform-ce:5.4.8-1trusty"
+        image: "hpccsystems/platform-ce:6.0.2-1trusty"

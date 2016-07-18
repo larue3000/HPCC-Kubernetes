@@ -64,7 +64,7 @@ kubectl delete -f hpcc.yaml
 ## Deploy a HPCC Cluster with Kubernetes Controller
 In Kubernetes a [_Replication Controller_](../../docs/user-guide/replication-controller.md) is responsible for replicating sets of identical pods.  Like a _Service_ it has a selector query which identifies the members of it's set.  Unlike a _Service_ it also has a desired number of replicas, and it will create or delete _Pods_ to ensure that the number of _Pods_ matches up with it's desired state.
 
-Replication Controllers will "adopt" existing pods that match their selector query, so let's create a Replication Controller with a single replica to adopt our existing Redis server. Here are current HPCC the replication controller config: [master-controller.yaml](master-controller.yaml), [thor-controller.yaml](thor-controller.yaml),[roxie-controller.yaml](roxie-controller.yaml). In future we want to further divid master configuration to dali, esp and rest support components.
+Replication Controllers will "adopt" existing pods that match their selector query, so let's create a Replication Controller with a single replica to adopt our existing Redis server. Here are current HPCC the replication controller config: [master-controller.yaml](master-controller.yaml), [thor-controller.yaml](thor-controller.yaml), [roxie-controller.yaml](roxie-controller.yaml).  [esp-controller.yaml](esp-controller.yaml).  In future we want to further divid master configuration to dali, sasha and rest support components.
 
 
 ###Turn up thor instances
@@ -75,20 +75,32 @@ The default thor-controller define two thor slaves.
 To make sure they are up:
 ```sh
 kubectl get rc thor-controller
-CONTROLLER        CONTAINER(S)   IMAGE(S)                                SELECTOR   REPLICAS   AGE
-thor-controller   thor           hpccsystems/platform-ce:5.4.8-1trusty   app=thor   2          1m
+NAME              DESIRED   CURRENT   AGE
+thor-controller   2         2         1m
 ```
 
 ### Turn up roxie instances
 ```sh
 kubectl create -f roxie-controller.yaml
 ```
-The default thor-controller define one roxie instance. 
+The default roxie-controller define two roxie instance. 
 To make sure they are up:
 ```sh
 kubectl get rc roxie-controller
-CONTROLLER         CONTAINER(S)   IMAGE(S)                                SELECTOR    REPLICAS   AGE
-roxie-controller   roxie          hpccsystems/platform-ce:5.4.8-1trusty   app=roxie   1          1m
+NAME               DESIRED   CURRENT   AGE
+roxie-controller   2         2         2m
+```
+
+### Turn up esp instances
+```sh
+kubectl create -f esp-controller.yaml
+```
+The default esp-controller define two roxie instance. 
+To make sure they are up:
+```sh
+kubectl get rc esp-controller
+NAME               DESIRED   CURRENT   AGE
+esp-controller     2         2         2m
 ```
 
 ### Turn up master instance
@@ -97,9 +109,12 @@ To verify the thor and roxie are ready:
 ```sh
 kubectl get pods
 NAME                     READY     STATUS    RESTARTS   AGE
-roxie-controller-m568w   1/1       Running   0          5m
-thor-controller-7htgx    1/1       Running   0          8m
-thor-controller-pogul    1/1       Running   0          8m
+esp-controller-bbgqu      1/1       Running   0         3m
+esp-controller-wc8ae      1/1       Running   0         3m
+roxie-controller-hmvo5    1/1       Running   0         3m
+roxie-controller-x7ksh    1/1       Running   0         3m
+thor-controller-2sbe5     1/1       Running   0         3m
+thor-controller-p1q7f     1/1       Running   0         3m
 ```
 To start master instance:
 ```sh
@@ -108,16 +123,19 @@ kubectl create -f master-controller.yaml
 Make sure it is up and ready:
 ```sh
 kubectl get rc master-controller
-CONTROLLER          CONTAINER(S)   IMAGE(S)                                SELECTOR     REPLICAS   AGE
-master-controller   master         hpccsystems/platform-ce:5.4.8-1trusty   app=master   1          36s
+NAME                DESIRED   CURRENT   AGE
+master-controller   1         1         12h
 
 kubectl get pods
 NAME                      READY     STATUS    RESTARTS   AGE
-master-controller-ar6jn   1/1       Running   0          47s
-roxie-controller-m568w    1/1       Running   0          12m
-thor-controller-7htgx     1/1       Running   0          15m
-thor-controller-pogul     1/1       Running   0          15m
-```
+esp-controller-bbgqu      1/1       Running   0          5m
+esp-controller-wc8ae      1/1       Running   0          5m
+master-controller-wa5z8   1/1       Running   0          5m
+roxie-controller-hmvo5    1/1       Running   0          5m
+roxie-controller-x7ksh    1/1       Running   0          5m
+thor-controller-2sbe5     1/1       Running   0          5m
+thor-controller-p1q7f     1/1       Running   0          5m
+
 
 ### Access ECLWatch and Verify the cluster
 Get mastr ip:
@@ -133,6 +151,30 @@ kubectl exec master-controller-ar6jn -i -t -- bash -il
 ```
 configuration scripts, log ile and outputs are under /tmp/
 
+
+### Start a load balancer on esp
+When deploy Kubernetes on a cloud such as AWS you can create load balancer for esp
+```sh
+kubectl create -f esp-service.yaml
+```
+Make sure the service is up
+```sh
+kubectl get service
+NAME         CLUSTER-IP    EXTERNAL-IP        PORT(S)    AGE
+esp          10.0.21.220   a2c49b2864c79...   8001/TCP   3h
+kubernetes   10.0.0.1      <none>             443/TCP    3d
+```
+
+The "EXTERNAL-IP" is too long.
+```sh
+kubectl get service -o json | grep a2c49b2864c79
+"hostname": "a2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com"
+```
+2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com" and we define the port 8001. so 2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com:8001 should display eclwatch
+
+
+
+
 ### Scale thor and roxie replicated pods
 For example, to add one more thor and make total 3 thor slaves:
 ```sh
@@ -143,8 +185,10 @@ kubectl scale rc thor --replicas=3
 
 ### Stop and delete HPCC cluster
 ```sh
+kubectl delete -f esp-service.yaml
 kubectl delete -f thor-controller.yaml
 kubectl delete -f roxie-controller.yaml
+kubectl delete -f esp-controller.yaml
 kubectl delete -f master-controller.yaml
 ```
 

@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: hpcc
+  labels:
+    app: hpcc
 spec:  # specification of the pod’s contents
   restartPolicy: Never
   containers:
   - name: hpcc-trusty
-    image: "hpccsystems/platform-ce:5.4.8-1trusty"
+    image: "hpccsystems/platform-ce:6.0.2-1trusty"
     ports:
        - containerPort: 8010
