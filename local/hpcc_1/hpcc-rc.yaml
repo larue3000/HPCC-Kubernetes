@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hpcc-rc
+spec:
+  replicas: 2 
+  selector:
+    app: hpcc
+  template:
+    metadata:
+      labels:
+        app: hpcc
+    spec:
+      containers:
+        - name: node
+          image: "hpccsystems/hpcc:latest"
+          ports:
+            - containerPort: 8010
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /tmp2
+              name: config
+ #         command:
+ #           - /tmp/start_hpcc.sh
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-default
+

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+
+kubectl.exe delete -f hpcc-rc.yaml
+#kubectl.exe delete -f config-pvc.yaml
+#kubectl.exe delete -f config-pv.yaml
+#kubectl.exe delete -f nfs-server-service.yaml
+#kubectl.exe delete -f nfs-server-rc.yaml
+
+echo "kubectl.exe get pod"
+kubectl.exe get pod
+
+echo "kubectl.exe get service"
+kubectl.exe get service
+
+echo "kubectl.exe get pv"
+kubectl.exe get pv
+
+echo "kubectl.exe get pvc"
+kubectl.exe get pvc
+
+
+
+
+

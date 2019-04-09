@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/config.hash: 5f1dd1deb568a3167ac66d00644d2bd2
+    kubernetes.io/config.mirror: 5f1dd1deb568a3167ac66d00644d2bd2
+    kubernetes.io/config.seen: "2019-03-03T02:27:16.478350874Z"
+    kubernetes.io/config.source: file
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  creationTimestamp: "2019-03-03T02:27:36Z"
+  labels:
+    component: kube-apiserver
+    tier: control-plane
+  name: kube-apiserver-minikube
+  namespace: kube-system
+  resourceVersion: "155066"
+  selfLink: /api/v1/namespaces/kube-system/pods/kube-apiserver-minikube
+  uid: e883d1ff-3d5b-11e9-8109-08002733bd04
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    - --admission-control=Initializers,NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
+    - --kubelet-client-certificate=/var/lib/minikube/certs/apiserver-kubelet-client.crt
+    - --allow-privileged=true
+    - --client-ca-file=/var/lib/minikube/certs/ca.crt
+    - --tls-cert-file=/var/lib/minikube/certs/apiserver.crt
+    - --requestheader-extra-headers-prefix=X-Remote-Extra-
+    - --requestheader-allowed-names=front-proxy-client
+    - --advertise-address=192.168.99.100
+    - --service-account-key-file=/var/lib/minikube/certs/sa.pub
+    - --tls-private-key-file=/var/lib/minikube/certs/apiserver.key
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+    - --requestheader-username-headers=X-Remote-User
+    - --requestheader-group-headers=X-Remote-Group
+    - --kubelet-client-key=/var/lib/minikube/certs/apiserver-kubelet-client.key
+    - --secure-port=8443
+    - --proxy-client-key-file=/var/lib/minikube/certs/front-proxy-client.key
+    - --requestheader-client-ca-file=/var/lib/minikube/certs/front-proxy-ca.crt
+    - --proxy-client-cert-file=/var/lib/minikube/certs/front-proxy-client.crt
+    - --service-cluster-ip-range=10.96.0.0/12
+    - --insecure-port=0
+    - --enable-bootstrap-token-auth=true
+    - --authorization-mode=Node,RBAC
+    - --etcd-servers=https://127.0.0.1:2379
+    - --etcd-cafile=/var/lib/minikube/certs/etcd/ca.crt
+    - --etcd-certfile=/var/lib/minikube/certs/apiserver-etcd-client.crt
+    - --etcd-keyfile=/var/lib/minikube/certs/apiserver-etcd-client.key
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.10.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 192.168.99.100
+        path: /healthz
+        port: 8443
+        scheme: HTTPS
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    name: kube-apiserver
+    resources:
+      requests:
+        cpu: 250m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/lib/minikube/certs/
+      name: k8s-certs
+      readOnly: true
+    - mountPath: /etc/ssl/certs
+      name: ca-certs
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  hostNetwork: true
+  nodeName: minikube
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /etc/ssl/certs
+      type: DirectoryOrCreate
+    name: ca-certs
+  - hostPath:
+      path: /var/lib/minikube/certs/
+      type: DirectoryOrCreate
+    name: k8s-certs
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2019-02-11T18:29:10Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2019-02-11T18:29:13Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2019-02-11T18:29:10Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://1ce549eca545282fc3bc0d443eef3d4e70667797bec0227fde2af4087782fb01
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.10.0
+    imageID: docker-pullable://k8s.gcr.io/kube-apiserver-amd64@sha256:8b7a675c6fdda0469e971e5b1f3e902bb71c36396faf506f1511052705a5b0ee
+    lastState: {}
+    name: kube-apiserver
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: "2019-03-03T02:27:18Z"
+  hostIP: 10.0.2.15
+  phase: Running
+  podIP: 10.0.2.15
+  qosClass: Burstable
+  startTime: "2019-02-11T18:29:10Z"
