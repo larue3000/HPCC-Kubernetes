@@ -1,0 +1,7 @@
+#!/bin/bash
+kubectl.sh create -f admin.yaml
+kubectl.sh create -f support.yaml
+#kubectl.sh create -f esp-e1.yaml
+kubectl.sh create -f roxie-r1.yaml
+#kubectl.sh create -f thormaster-t1.yaml
+#kubectl.sh create -f thor-t1.yaml

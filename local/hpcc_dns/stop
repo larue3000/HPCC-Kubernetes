@@ -1,0 +1,12 @@
+#!/bin/bash
+kubectl.sh delete -f admin.yaml
+#kubectl.sh delete -f dali-sf.yaml
+kubectl.sh delete -f support-sf.yaml
+kubectl.sh delete -f esp-e1-sf.yaml
+
+
+#kubectl.sh delete -f support.yaml
+#kubectl.sh delete svc esp-e1
+##kubectl.sh delete -f roxie-r1.yaml
+#kubectl.sh delete -f thormaster-t1.yaml
+#kubectl.sh delete -f thor-t1.yaml

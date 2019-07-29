@@ -38,7 +38,9 @@ kubectl exec  -i -t hpcc -- bash -il
 ```
 Type "exit" to exit it.
 
-To the HPCC node ip:
+Tt
+exit
+ the HPCC node ip:
 ```sh
 kubectl get pod hpcc -o json | grep podIP
     "podIP": "172.17.0.2",
@@ -197,3 +199,24 @@ kubectl delete -f master-controller.yaml
 
 2. Roxie fails to start in cluster environenment. This is no WMEM_MAX and RMEM_MAX resources in the container environenment. These buffer size setting should be configured on the host system. In HPCC 6.0.0 we will skip the checking on containers and document this. We do need to test network performance and give some guidanse for the buffer size setting on the host.
 
+
+
+### New Instruction ###
+1. create configmap:
+   From configmap directory
+   kubectl.sh create configmap hpcc-config --from-file=hpcc/
+   kubectl.sh get configmap
+
+2. grant access permission:
+   From security directory
+   kubectl.sh apply -f (resource).yml
+   for get_pods.py need:  kubectl.sh apply -f cluster_role.yaml
+
+3. Start pods
+   ./start
+
+4. Stop pods
+   ./stop
+
+5. ssh to pod
+   kubectl exec  -i -t <pod name> -- bash -il

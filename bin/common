@@ -1,0 +1,6 @@
+KUBECTL=kubectl.exe
+OS=$(uname)
+if [ "$OS" =  "Linux" ] || [ "$OS" = "Darwin" ]
+then
+  KUBECTL=kubectl.sh
+fi

@@ -1,2 +1,2 @@
-kubectl.exe create configmap game-config --from-file=hpcc/
+kubectl.exe create configmap hpcc-config --from-file=hpcc/
 #kubectl.exe get configmap

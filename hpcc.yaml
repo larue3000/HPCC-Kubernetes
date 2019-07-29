@@ -1,13 +1,23 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: hpcc
+  name: hpcc-administration
   labels:
     app: hpcc
-spec:  # specification of the pod’s contents
-  restartPolicy: Never
+spec:
   containers:
-  - name: hpcc-trusty
-    image: "hpccsystems/platform-ce:6.0.2-1trusty"
+  - name: hpcc-admin
+    image: "hpccsystems/hpcc-m:admin"
     ports:
-       - containerPort: 8010
+            - containerPort: 8010
+#          securityContext:
+#            privileged: true
+          volumeMounts:
+            - mountPath: /etc/hpcc_config_map
+              name: env-config 
+ #         command:
+ #           - /tmp/start_hpcc.sh
+      volumes:
+        - name: env-config
+          configMap:
+             name: hpcc-config

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname $0)
+
+cd ${SCRIPT_DIR}/../local/hpcc_3
+WORK_DIR=$(pwd)
+
+
+kubectl.sh create -f ./admin.yaml
