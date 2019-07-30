@@ -1,7 +1,10 @@
 #!/bin/bash
-kubectl.sh create -f admin.yaml
-kubectl.sh create -f support.yaml
-#kubectl.sh create -f esp-e1.yaml
-kubectl.sh create -f roxie-r1.yaml
-#kubectl.sh create -f thormaster-t1.yaml
-#kubectl.sh create -f thor-t1.yaml
+WORK_DIR=$(dirname $0)
+. ${WORK_DIR}/../../bin/common
+
+${KUBECTL} create -f admin.yaml
+${KUBECTL} create -f support.yaml
+#${KUBECTL} create -f esp-e1.yaml
+${KUBECTL} create -f roxie-r1.yaml
+#${KUBECTL} create -f thormaster-t1.yaml
+#${KUBECTL} create -f thor-t1.yaml

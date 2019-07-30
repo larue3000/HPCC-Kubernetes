@@ -2,5 +2,12 @@ KUBECTL=kubectl.exe
 OS=$(uname)
 if [ "$OS" =  "Linux" ] || [ "$OS" = "Darwin" ]
 then
-  KUBECTL=kubectl.sh
+  if [ -n "$(which kubectl.sh)" ]
+  then
+    KUBECTL=kubectl.sh
+  else
+    KUBECTL=kubectl
+  fi
 fi
+
+

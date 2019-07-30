@@ -1,7 +1,11 @@
 #!/bin/bash
-kubectl.sh delete -f admin.yaml
-kubectl.sh delete -f support.yaml
-#kubectl.sh delete -f esp-e1.yaml
-kubectl.sh delete -f roxie-r1.yaml
-#kubectl.sh delete -f thormaster-t1.yaml
-#kubectl.sh delete -f thor-t1.yaml
+WORK_DIR=$(dirname $0)
+. ${WORK_DIR}/../../bin/common
+
+
+${KUBECTL} delete -f admin.yaml
+${KUBECTL} delete -f support.yaml
+#${KUBECTL} delete -f esp-e1.yaml
+${KUBECTL} delete -f roxie-r1.yaml
+#${KUBECTL} delete -f thormaster-t1.yaml
+#${KUBECTL} delete -f thor-t1.yaml
