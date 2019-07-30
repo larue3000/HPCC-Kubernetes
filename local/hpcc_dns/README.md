@@ -4,6 +4,12 @@
 
 ### Minikube
 
+Installation: https://kubernetes.io/docs/tasks/tools/install-minikube/
+Start minikube
+  1) minikube start
+  2) set virtualbox resources: 
+     minikube --vm-drive=virtualbox -cpu 4 --disk-size 100g --memory 8192 start:w
+
 
 ### Linux
 
