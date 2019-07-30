@@ -16,15 +16,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eclwatch-e1
+  name: ew-e1
 #  namespace: default
+  labels:
+    app: esp-e1
 spec:
   ports:
   - port: 8010
-    name: eclwatch-e1
+    name: eclwatch
     nodePort: 32000
+    targetPort: 8010
+    protocol: TCP
   selector:
-    app: esp-e1
+    app: svc-e1
   type:
     #LoadBalancer
     NodePort
@@ -35,7 +39,7 @@ metadata:
   name: esp-e1
 spec:  # specification of the pod’s contents
   serviceName: "svc-e1"
-#  serviceName: "eclwatch-e1"
+  #serviceName: ew-e1
   replicas: 2
   selector:
     matchLabels:

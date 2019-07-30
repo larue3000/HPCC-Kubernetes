@@ -96,11 +96,13 @@ cd bin/
 All availalble HPCC componenets include Esp are listed.
 
 Access EclWatch
-A service "eclwatch-e1" is defined for ESP "e1" cluster. Ideally it should be configured as "LoadBalancer" and get external ip from the network. But this will not be possible in our working environment. In most commercial cloud solution this shouldn't be a problem. 
+A service "ew-e1" is defined for ESP "e1" cluster. Ideally it should be configured as "LoadBalancer" and get external ip from the network. But this will not be possible in our working environment. In most commercial cloud solution this shouldn't be a problem. 
 
-The service has "Cluster IP" but it is internal only to the cluster. Outside, include host can access it. Traditionally "NodePort" can be used to allow access the service through <NodeIP>:<NodePort>. But currently this seems doesn't work for StatefullSet. Not sure if it is due to we have two services defined for the Pod. 
-
-Currently user can access EclWatch through ESP Pod/Contianer ip
+For local solution "NodePort" type service is used. 
+User can access EclWatch through local kubernetes host and mapped port: 32000.
+For minikub run
+   minikube service ew-e1
+This will display EclWatch on default browser
 
 ## Code and Files
 
@@ -108,7 +110,6 @@ Pod/Service definitions: local/hpcc_dns
 Help scripts bin/
 
 ## Known Problems
-### NodePort doesn't work
 ### Can't get single Pod not StatefulSet FQDN work
 ### Can't get Pod FQDN work without provide a service
 
