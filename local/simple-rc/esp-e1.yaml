@@ -1,37 +1,38 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: esp-e1
-  namespace: default
-  labels:
-    app: esp-e1
+  name: ew-e1
+#  namespace: default
 spec:
-  ports:
-  - port: 8010
-    name: esp-e1
   selector:
     app: esp-e1
+  ports:
+  - protocol: TCP
+    port: 8010
+    targetPort: 8010
+    nodePort: 31000
   type:
-    LoadBalancer
+    #LoadBalancer
+    NodePort
 ---
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: esp-e1
 spec:  # specification of the pod’s contents
-  serviceName: "esp-e1"
-  replicas: 2
+  replicas: 1
   selector:
-    matchLabels:
-      app: esp-e1
+     app: esp-e1
+     cluster: e1
   template:
     metadata:
       labels:
+        cluster: e1
         app: esp-e1
     spec:
       containers:
         - name: esp-e1 
-          image: "hpccsystems/hpcc:7.2.20-1"
+          image: "hpccsystems/platform"
           ports:
             - name: eclwatch
               containerPort: 8010 

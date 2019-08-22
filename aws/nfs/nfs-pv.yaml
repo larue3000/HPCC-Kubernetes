@@ -1,9 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: config-default
-  labels:
-    config-type: default
+  name: nfs
 spec:
   capacity:
     storage: 1Gi
@@ -11,6 +9,5 @@ spec:
     - ReadWriteMany
   nfs:
     # FIXME: use the right IP
-    server: 10.103.25.235
-    #path: /hpcc-config/default
-    path: /tmp
+    server: 10.0.202.122
+    path: "/exports"

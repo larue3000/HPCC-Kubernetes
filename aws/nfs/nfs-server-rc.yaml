@@ -13,11 +13,7 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: hpccsystems/nfs-server:latest
-        command:
-          - /usr/local/bin/run_nfs.sh
-        args:
-          - /tmp
+        image: gcr.io/google-samples/nfs-server:1.1
         ports:
           - name: nfs
             containerPort: 2049
@@ -25,4 +21,13 @@ spec:
             containerPort: 20048
           - name: rpcbind
             containerPort: 111
-
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - mountPath: /exports
+            name: hpcc-share
+      volumes:
+        - name: hpcc-share
+          awsElasticBlockStore:
+            volumeID: vol-4aa30797
+            fsType: ext4

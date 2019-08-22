@@ -5,7 +5,7 @@ WORK_DIR=$(dirname $0)
 
 ${KUBECTL} delete -f admin.yaml
 ${KUBECTL} delete -f support.yaml
-${KUBECTL} delete -f esp-e1-sf.yaml
-#${KUBECTL} delete -f roxie-r1.yaml
+${KUBECTL} delete -f esp-e1.yaml
+${KUBECTL} delete -f roxie-r1.yaml
 #${KUBECTL} delete -f thormaster-t1.yaml
 #${KUBECTL} delete -f thor-t1.yaml

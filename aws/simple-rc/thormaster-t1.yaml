@@ -6,4 +6,4 @@ spec:  # specification of the pod’s contents
   restartPolicy: Never
   containers:
     - name:  thormaster-t1
-      image: "hpccsystems/hpcc:7.2.20-1"
+      image: "hpccsystems/platform"
