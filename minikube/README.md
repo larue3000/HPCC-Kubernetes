@@ -5,9 +5,10 @@
 
 Installation: https://kubernetes.io/docs/tasks/tools/install-minikube/
 Start minikube
-  1) minikube start
-  2) set virtualbox resources: 
-     minikube --vm-drive=virtualbox -cpu 4 --disk-size 100g --memory 8192 start:w
+  1) minikube start -p minikube
+  2) change setting:
+     2.1) minikube stop -p minikube
+     2.2) minikube.exe --vm-driver=virtualbox --cpus 4 --disk-size 100g --memory 8192 start -p minikube
 
 ## bootstrap
 This will setup ConfigMap and grant security permissions
