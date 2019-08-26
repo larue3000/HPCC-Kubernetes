@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: thormaster-t1
+spec:  # specification of the pod’s contents
+  restartPolicy: Never
+  containers:
+    - name:  thormaster-t1
+      image: "hpccsystems/platform"
