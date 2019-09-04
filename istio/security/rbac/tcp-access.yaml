@@ -1,0 +1,12 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: tcp-access
+  namespace: default
+spec:
+  rules:
+  - services: ["*"]
+    constrains:
+    - key: "desination.port"
+      values: ["22"]
+
