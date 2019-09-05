@@ -1,6 +1,9 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(dirname $0)
+cd ${SCRIPT_DIR}
+SCRIPT_DIR=$(pwd)
+
 source  ${SCRIPT_DIR}/../bin/common
 
 namespace=default
@@ -14,9 +17,12 @@ do
   ${KUBECTL} apply -f $i
 done
 
+
+cd ${SCRIPT_DIR}
 echo "Enforce mutual TLS authentication (restric mutual TLS)"
 #${KUBECTL} apply -f install/kubernetes/istio-demo-auth.yaml
-${KUBECTL} apply -f ${SCRIPT_DIR}/istio-demo-auth.yaml
+echo "${KUBECTL} apply -f istio-demo-auth.yaml"
+${KUBECTL} apply -f istio-demo-auth.yaml
 
 echo "Verify the installation"
 ${KUBECTL} get svc -n istio-system

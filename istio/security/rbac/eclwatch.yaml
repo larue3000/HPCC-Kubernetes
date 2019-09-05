@@ -6,7 +6,8 @@ metadata:
 spec:
   rules:
   #- services: ["*"]
-  - services: ["esp-e1"]
-    #constraints:
-    #- key: "destination.port"
-    #  values: ["8010"]
+  - services: ["esp-e1.default.svc.cluster.local"]
+  #- services: ["esp-e1"]
+  #  constraints:
+  #  - key: "destination.port"
+  #    values: ["8010"]

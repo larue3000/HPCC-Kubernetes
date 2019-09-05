@@ -12,5 +12,5 @@ spec:
   roleRef:
     kind: ServiceRole
     name: "internal-http"
-  mode: PERMISSIVE
+  #mode: PERMISSIVE
 
