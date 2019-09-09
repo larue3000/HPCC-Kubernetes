@@ -20,14 +20,15 @@ done
 
 cd ${SCRIPT_DIR}
 echo "Enforce mutual TLS authentication (restric mutual TLS)"
-#${KUBECTL} apply -f install/kubernetes/istio-demo-auth.yaml
 echo "${KUBECTL} apply -f istio-demo-auth.yaml"
 ${KUBECTL} apply -f istio-demo-auth.yaml
 
 echo "Verify the installation"
+echo "${KUBECTL} get svc -n istio-system"
 ${KUBECTL} get svc -n istio-system
 
 #echo "Label namespace as istio-injection-enabled"
+echo "${KUBECTL} label namespace  ${namespace} istio-injection=enabled"
 #${KUBECTL} label namespace  ${namespace} istio-injection=enabled
 
 

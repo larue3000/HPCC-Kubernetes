@@ -5,8 +5,9 @@ metadata:
   namespace: default
 spec:
   rules:
-  #- services: ["*"]
   - services: ["esp-e1.default.svc.cluster.local"]
+
+  #- services: ["*"]
   #- services: ["esp-e1"]
   #  constraints:
   #  - key: "destination.port"

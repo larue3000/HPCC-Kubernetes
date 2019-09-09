@@ -12,3 +12,6 @@ https://istio.io/docs/setup/kubernetes/install/kubernetes/
 
 #make sure every pod is at least one service
 #https://istio.io/docs/setup/kubernetes/additional-setup/requirements/
+
+#To to nodeport of 8010:
+#kubectl.sh get service -n istio-system istio-ingressgateway
