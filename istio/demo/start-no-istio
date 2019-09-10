@@ -1,6 +1,6 @@
 #!/bin/bash
 WORK_DIR=$(dirname $0)
-. ${WORK_DIR}/../bin/common
+. ${WORK_DIR}/../../bin/common
 
 ${KUBECTL} create -f admin.yaml
 ${KUBECTL} create -f support.yaml

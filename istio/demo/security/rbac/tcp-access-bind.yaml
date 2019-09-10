@@ -10,4 +10,3 @@ spec:
   roleRef:
     kind: ServiceRole
     name: "tcp-access"
-  #mode: PERMISSIVE

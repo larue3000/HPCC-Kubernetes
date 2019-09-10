@@ -3,9 +3,14 @@ This repo has several HPCC Systems Cluster examples on Kubernetes
 
 ## Bootstrap ###
 Bootstrap will grant access permission for Kubernetes APIs as well create configmap for environmet.xml configuration
-In bin directory:
+Depands on the Kubernetes environment configmap files may be different. Currently there is aws/configmap/hpcc for AWS environment and the other one is local/configmap/hpcc for local deployment.
+In bin directory 
 ```sh
-./bootstrap.sh
+# AWS
+./bootstrap-aws.sh
+
+# Local
+./bootstrap-local.sh
 or 
 bootstrap.bat
 ```
