@@ -1,6 +1,6 @@
 #!/bin/bash
 WORK_DIR=$(dirname $0)
-. ${WORK_DIR}/../../../bin/common
+. ${WORK_DIR}/../../../../bin/common
 
 #${KUBECTL} delete -f internal-http-bind.yaml
 #${KUBECTL} delete -f internal-http-role.yaml

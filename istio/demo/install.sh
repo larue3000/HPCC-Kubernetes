@@ -4,7 +4,7 @@ SCRIPT_DIR=$(dirname $0)
 cd ${SCRIPT_DIR}
 SCRIPT_DIR=$(pwd)
 
-source  ${SCRIPT_DIR}/../bin/common
+source  ${SCRIPT_DIR}/../../bin/common
 
 namespace=default
 # Kubernetes quick start Install: https://istio.io/docs/setup/kubernetes/install/kubernetes/
