@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roxie-roxie2
+spec:  # specification of the pod’s contents
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: roxie-roxie2
+  template:
+    metadata:
+      labels:
+        app: roxie-roxie2
+    spec:
+      containers:
+      - name:  roxie-roxie2
+        image: "hpccsystems/platform"
+        ports:
+        - name: roxie
+          containerPort: 9876
+        - name: roxie-secure
+          containerPort: 19876
+        volumeMounts:
+        -  name: roxie2-efs-pvc          
+           mountPath: "/var/lib/HPCCSystems/hpcc-data"
+      volumes:
+      - name: roxie2-efs-pvc
+        persistentVolumeClaim:
+          claimName: efs
+  
