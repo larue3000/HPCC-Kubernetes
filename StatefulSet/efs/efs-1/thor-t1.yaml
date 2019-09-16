@@ -16,7 +16,7 @@ metadata:
   name: thor-thor1
 spec:  # specification of the pod’s contents
   serviceName: "svc-thor-thor1"
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: svc-thor-thor1
@@ -29,14 +29,15 @@ spec:  # specification of the pod’s contents
       - name:  thor-thor1
         image: "hpccsystems/platform"
         volumeMounts:
-        - mountPath: "/var/lib/HPCCSystems"
-          name: thor-thor1-data
+        - mountPath: "/var/lib/HPCCSystems/hpcc-data"
+          name: efs
   volumeClaimTemplates:
   - metadata:
-      name: thor-thor1-data
+      name: efs
+      annotations:
+        volume.beta.kubernetes.io/storage-class: aws-efs
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: gp2
       resources:
         requests:
-          storage: 60Gi
+          storage: 1Mi

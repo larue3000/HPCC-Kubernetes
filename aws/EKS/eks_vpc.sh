@@ -4,7 +4,7 @@
 export KUBE_ZONE=us-east-1b
 export KUBE_ZONE2=us-east-1c
 eksctl create cluster \
-	--name hpccd \
+	--name hpcc2 \
 	--version 1.13 \
 	--nodegroup-name standard-workers \
 	--node-type m4.2xlarge \
@@ -13,8 +13,9 @@ eksctl create cluster \
 	--nodes-max 4 \
 	--node-volume-size 100 \
 	--node-ami auto \
-	--vpc-private-subnets subnet-eaacfdb6 \
-	--vpc-private-subnets subnet-9e08ecd3 \
+	--vpc-public-subnets subnet-eaacfdb6 \
+	--vpc-public-subnets subnet-9e08ecd3 \
+	--node-security-groups sg-397a1a62 \
 	--tags "application=hpccsystems,lifecycle=dev,market=hpccsystems" \
 	--tags "owner_email=xiaoming.wang@lexisnexis.com" \
 	--tags "support_email=xiaoming.wang@lexisnexis.com" \

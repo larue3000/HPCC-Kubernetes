@@ -36,10 +36,10 @@ spec:  # specification of the pod’s contents
 
         volumeMounts:
         - mountPath: "/var/lib/HPCCSystems"
-          name: roxie-roxie1-data
+          name: ebs
   volumeClaimTemplates:
   - metadata:
-      name: roxie-roxie1-data
+      name: ebs
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: gp2

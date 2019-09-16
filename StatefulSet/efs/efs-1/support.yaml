@@ -31,14 +31,15 @@ spec:  # specification of the pod’s contents
       - name: support
         image: "hpccsystems/platform"
         volumeMounts:
-        - mountPath: "/var/lib/HPCCSystems"
-          name: support-data
+        - mountPath: "/var/lib/HPCCSystems/hpcc-data"
+          name: efs
   volumeClaimTemplates:
   - metadata:
-      name: support-data
+      name: efs
+      annotations:
+        volume.beta.kubernetes.io/storage-class: aws-efs
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: gp2
       resources:
         requests:
-          storage: 40Gi
+          storage: 1Mi

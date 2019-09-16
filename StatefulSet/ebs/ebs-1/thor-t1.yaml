@@ -30,10 +30,10 @@ spec:  # specification of the pod’s contents
         image: "hpccsystems/platform"
         volumeMounts:
         - mountPath: "/var/lib/HPCCSystems"
-          name: thor-thor1-data
+          name: ebs
   volumeClaimTemplates:
   - metadata:
-      name: thor-thor1-data
+      name: ebs
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: gp2

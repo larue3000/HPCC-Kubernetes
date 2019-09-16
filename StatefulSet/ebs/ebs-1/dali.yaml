@@ -13,12 +13,12 @@ spec:  # specification of the pod’s contents
   volumes:
   - name: dali-data
     persistentVolumeClaim:
-      claimName: dali-data
+      claimName: ebs-dali
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dali-data 
+  name: ebs-dali
 spec:
   accessModes:
     - ReadWriteOnce

@@ -11,3 +11,8 @@ ${KUBECTL} delete -f roxie-r1.yaml
 ${KUBECTL} delete -f roxie-r2.yaml
 ${KUBECTL} delete -f thormaster-t1.yaml
 ${KUBECTL} delete -f thor-t1.yaml
+
+kubectl get pvc | grep "^ebs-"| cut -d' ' -f1 | while read name
+do
+  ${KUBECTL} delete pvc $name
+done

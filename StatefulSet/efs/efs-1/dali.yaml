@@ -8,21 +8,10 @@ spec:  # specification of the pod’s contents
   - name:  dali
     image: "hpccsystems/platform"
     volumeMounts:
-    - mountPath: "/var/lib/HPCCSystems"
+    - mountPath: "/var/lib/HPCCSystems/hpcc-data"
       name: dali-data
   volumes:
   - name: dali-data
     persistentVolumeClaim:
-      claimName: dali-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: dali-data 
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: gp2
-  resources:
-    requests:
-      storage: 40Gi
+      claimName: efs
+

@@ -16,7 +16,7 @@ metadata:
   name: roxie-roxie1
 spec:  # specification of the pod’s contents
   serviceName: "svc-roxie-roxie1"
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: svc-roxie-roxie1
@@ -34,11 +34,11 @@ spec:  # specification of the pod’s contents
         - name: roxie-secure
           containerPort: 19876
         volumeMounts:
-        - mountPath: "/var/lib/HPCCSystems/hpcc-data"
-          name: roxie-roxie1-data          
+        -  name: efs          
+           mountPath: "/var/lib/HPCCSystems/hpcc-data"
   volumeClaimTemplates:
   - metadata:
-      name: roxie-roxie1-data
+      name: efs
       annotations:
         volume.beta.kubernetes.io/storage-class: aws-efs
     spec:

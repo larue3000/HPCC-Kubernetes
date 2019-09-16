@@ -1,4 +1,4 @@
-# Set [Elastic Kubernetes Service (EKS)] (https://aws.amazon.com/eks) for HPCC Systems
+# Set [Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks) for HPCC Systems
 
 ## Install ##
 ### IAM User Permissions ###
