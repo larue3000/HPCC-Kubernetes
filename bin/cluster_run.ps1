@@ -11,14 +11,14 @@ Get status/start/stop  HPCC Systems Cluster
 .Example
 ./cluster_run.ps1 -action status
 
-.NOTES
-
+. 
 .LINK
 https://github.com/xwang2713/HPCC-Kubernetes
 
 #>
 
 param(
+    $admin_pod="hpcc-admin",
     $namespace="default",
     $component="",
     $pod_name="",
@@ -27,9 +27,9 @@ param(
 
 $wkDir = split-path $myInvocation.MyCommand.path
 
-$KUBECTL="kubectl.exe"
+$KUBECTL = "kubectl.exe"
 cd $wkDir
-function get_cluster_status
+function get_cluster_status()
 {
   foreach ( $pod in (./cluster_query.ps1))
   {
@@ -38,56 +38,42 @@ function get_cluster_status
   }  
 }
 
-function runHPCC 
+function runHPCC ($a)
 {
     if ( "$pod_name" -eq "" ) 
     {
         return 1
     }
-   $cmd="${KUBECTL} exec $pod_name /etc/init.d/hpcc-init"
+   $cmd = "${KUBECTL} exec $pod_name /etc/init.d/hpcc-init"
    if  ( $comp_name )
    {
-      $cmd="$cmd -c $comp_name"
+      $cmd = "$cmd -c $comp_name"
    }
-   $cmd="$cmd $1"
+   $cmd = "$cmd $a"
    "$cmd"  
    iex "$cmd"
 
 }
 
-function runHPCCCluster
+function runHPCCCluster ( $a )
 {
- @" 
 
-###############################################
-#
-# $1 HPCC Cluster ...
-#
-###############################################
- "@
-   $cmd="${KUBECTL} exec $admin_pod /opt/hpcc-tools/$1_hpcc.sh"
+   $cmd = "${KUBECTL} exec $admin_pod /opt/hpcc-tools/${a}_hpcc.sh"
    "$cmd"
    iex "$cmd"
 
- @" 
 
-###############################################
-#
-# Status:
-#
-###############################################
-"@
-   get_cluster_status
+    get_cluster_status
 }
 
-function stxxxHPCC
+function stxxHPCC ($a)
 {
    if ( $action -ieq "restart" -or  ! $pod_name )
    {
-       runHPCCCluster $1
+       runHPCCCluster $a
        return
    }
-   runHPCC $1
+   runHPCC $a
 }
 
 
@@ -96,12 +82,38 @@ switch ( $action )
 {
    "status" 
    { 
-       get_clster_status
+       if (! $pod_name)
+       {
+          get_cluster_status
+       }
+       else 
+       {
+           runHPCC $action
+       }
+       
    }
    "start"  
    { 
-       "start" 
+       if ( $component -ieq "configmgr")
+       {
+          kubectl.exe exec -it $admin_pod /opt/HPCCSystems/sbin/configmgr
+       }
+       else 
+       {
+           stxxHPCC "start"
+       }
    }
-   "stop"  {"stop"}
-   "restart" { "restart"}
+   "stop"  
+   {
+       stxxHPCC "stop"
+   }
+   "restart"
+    { 
+        stxxHPCC "stop"
+        stxxHPCC "start"
+    }
+    "*"
+    {
+        "Unknown action $action"
+    }
 }

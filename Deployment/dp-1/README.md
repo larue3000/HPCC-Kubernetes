@@ -1,97 +1,110 @@
-# HPCC-Kubernetes
+# Deploy HPCC Systems Cluster with Deployment
 
-## Deploy a HPCC Cluster with Kubernetes Deployment
-In Kubernetes a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) is responsible for replicating sets of identical pods.  Like a _Service_ it has a selector query which identifies the members of it's set.  Unlike a _Service_ it also has a desired number of replicas, and it will create or delete _Pods_ to ensure that the number of _Pods_ matches up with it's desired state.
+This is a simple stateless deployment scenario. It can be used to both local and real cloud, such as AWS.
 
-Make sure bin/bootstrap.[sh|bat] started first
-
-```sh
+## Prerequisities
+- Bootstrap 
+  AWS:
+  ```console
+  bin/bootstrap-aws.sh
+  ```
+  Local:
+  ```console
+  bin/bootstrap-local.sh
+  ```
+## Deploy HPCC Systems Cluster
+```console
 ./start
 ```
-To verify the thor and roxie are ready:
-```sh
+To make sure they are up:
+```console
 kubectl get pods
-
-NAME                     READY     STATUS    RESTARTS   AGE
-esp-controller-bbgqu      1/1       Running   0         3m
-esp-controller-wc8ae      1/1       Running   0         3m
-roxie-controller-hmvo5    1/1       Running   0         3m
-roxie-controller-x7ksh    1/1       Running   0         3m
-thor-controller-2sbe5     1/1       Running   0         3m
-thor-controller-p1q7f     1/1       Running   0         3m
+NAME                               READY   STATUS    RESTARTS   AGE
+efs-provisioner-57965c4946-7w4b5   1/1     Running   0          2d16h
+esp-esp1-69b59769bd-94gm4          1/1     Running   0          16s
+hpcc-admin                         1/1     Running   0          19s
+roxie-roxie1-64d49d76cf-b28gh      1/1     Running   0          15s
+support-778c8ffbb-p44t7            1/1     Running   0          17s
+thor-thor1-75bb466cbf-skqj5        1/1     Running   0          13s
+thormaster-thor1                   1/1     Running   0          14s
 ```
-To start master instance:
-```sh
-kubectl create -f master-controller.yaml
+The cluster should be automatically configured and started.
+To verify the status
+```console
+bin/cluster_run.sh status
+Status of esp-esp1-69b59769bd-94gm4:
+mydafilesrv     ( pid      981 ) is running ...
+esp1            ( pid     1175 ) is running ...
+
+Status of roxie-roxie1-64d49d76cf-b28gh:
+mydafilesrv     ( pid      969 ) is running ...
+roxie1          ( pid     1168 ) is running ...
+
+Status of support-778c8ffbb-p44t7:
+mydafilesrv     ( pid     1006 ) is running ...
+mydali          ( pid     1200 ) is running ...
+mydfuserver     ( pid     1413 ) is running ...
+myeclagent      ( pid     1629 ) is running ...
+myeclccserver   ( pid     1832 ) is running ...
+myeclscheduler  ( pid     2049 ) is running ...
+mysasha         ( pid     2255 ) is running ...
+
+Status of thor-thor1-75bb466cbf-skqj5:
+mydafilesrv     ( pid      962 ) is running ...
+
+Status of thormaster-thor1:
+mydafilesrv     ( pid      969 ) is running ...
+thor1           ( pid     1214 ) is running with 1 slave process(es) ...
+``
+
+## Scale up/down
+Original roxie-roxie1 cluster has 1 instances. To increase it to 4 instances:
+```console
+kubeclt scale --replicas 2 StatefulSet/roxie-roxie1
+NAME                               READY   STATUS    RESTARTS   AGE
+efs-provisioner-57965c4946-7w4b5   1/1     Running   0          2d16h
+esp-esp1-69b59769bd-94gm4          1/1     Running   0          3m15s
+hpcc-admin                         1/1     Running   0          3m18s
+roxie-roxie1-64d49d76cf-b28gh      1/1     Running   0          3m14s
+roxie-roxie1-64d49d76cf-mflqn      1/1     Running   0          11s
+support-778c8ffbb-p44t7            1/1     Running   0          3m16s
+thor-thor1-75bb466cbf-skqj5        1/1     Running   0          3m12s
+thormaster-thor1                   1/1     Running   0          3m13s
 ```
-Make sure it is up and ready:
-```sh
-kubectl get rc master-controller
-NAME                DESIRED   CURRENT   AGE
-master-controller   1         1         12h
-
-kubectl get pods
-NAME                      READY     STATUS    RESTARTS   AGE
-esp-controller-bbgqu      1/1       Running   0          5m
-esp-controller-wc8ae      1/1       Running   0          5m
-master-controller-wa5z8   1/1       Running   0          5m
-roxie-controller-hmvo5    1/1       Running   0          5m
-roxie-controller-x7ksh    1/1       Running   0          5m
-thor-controller-2sbe5     1/1       Running   0          5m
-thor-controller-p1q7f     1/1       Running   0          5m
-
-
-### Access ECLWatch and Verify the cluster
-Get mastr ip:
-```sh
-kubectl get pod master-controller-ar6jn -o json | grep podIP
-        "podIP": "172.17.0.5",
-```
-If everything run OK you should access ECLWatch to verify the configuration: ```http://172.17.0.5:8010```. Again if you can't access the private ip you can try to tunnel it above described in deploy single HPCC instance.
-
-If something go wrong you can access the master instance:
-```sh
-kubectl exec master-controller-ar6jn -i -t -- bash -il
-```
-configuration scripts, log ile and outputs are under /tmp/
-
-
-### Start a load balancer on esp
-When deploy Kubernetes on a cloud such as AWS you can create load balancer for esp
-```sh
-kubectl create -f esp-service.yaml
-```
-Make sure the service is up
-```sh
-kubectl get service
-NAME         CLUSTER-IP    EXTERNAL-IP        PORT(S)    AGE
-esp          10.0.21.220   a2c49b2864c79...   8001/TCP   3h
-kubernetes   10.0.0.1      <none>             443/TCP    3d
-```
-
-The "EXTERNAL-IP" is too long.
-```sh
-kubectl get service -o json | grep a2c49b2864c79
-"hostname": "a2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com"
-```
-2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com" and we define the port 8001. so 2c49b2864c7911e6ab6506c30bb0563-401114081.eu-west-1.elb.amazonaws.com:8001 should display eclwatch
-
-
-
-
-### Scale thor and roxie replicated pods
-For example, to add one more thor and make total 3 thor slaves:
-```sh
-kubectl scale rc thor --replicas=3
+To scale it back
+```console
+kubeclt scale --replicas 1 Deployment/roxie-roxie1
 ```
 
-```Note```: we need more tests on this area, particularly need restart /tmp/run_master.sh to allow re-collect pod ips, generate new environment.xml and stop/start HPCC cluster.
+## Auto-scaling
+A sample autoscaling yaml file is provided. You can modify it and apply it
+```console
+kubectl apply -f esp-e1-hpa.yaml
+```
+Increase esp Pod cpu, for example run a big loop and monitor the auto-scaling.
 
-### Stop and delete HPCC cluster
-```sh
-kubectl delete -f esp-service.yaml
-kubectl delete -f thor-controller.yaml
-kubectl delete -f roxie-controller.yaml
-kubectl delete -f esp-controller.yaml
-kubectl delete -f master-controller.yaml
+The disable auto-scaling:
+```console
+kubectl delete -f esp-e1-hpa.yaml
+```
+
+## Stop/Start Cluster
+stop
+```console
+bin/cluster-run stop
+```
+start
+```console
+bin/cluster-run start
+```
+
+Get status
+```console
+bin/cluster-run status
+
+```
+
+## Delete Cluster ###
+```console
+./stop
 ```

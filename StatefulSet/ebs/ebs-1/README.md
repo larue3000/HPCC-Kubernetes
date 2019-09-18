@@ -1,33 +1,42 @@
-# Deploy Roxie/Thor Pods as StatefulSet/EBS
+# Deploy Dali/Sasha/DropZone/Roxie/Thor Pods as StatefulSet/EBS
 
-### Prerequisites ###
-```sh
-bin/bootstrap.sh
+Current deployment has Sasha/DropZone in support Pod.
+
+StatefulSet gives capibility to dynamically to create EBS volume to attache to newly added Pod/Container. It uses volumeClaimTemplate and StorageClass to achieve this.
+Delete VolumeClaim will automatically remove the volumes from EC2 otherwise user is responible to clean volumes in EC2.
+
+Compare EBS with EFS, EBS supports to have better performance but when cluster deployed cross multiple AZs it may be difficult to re-use these volumes.
+
+
+## Prerequisities
+```console
+bin/bootstrap-aws.sh
 ```
 
-### Deploy HPCC Sysstems Cluster
-```sh
+## Deploy HPCC Systems Cluster
+```console
 ./start
 ```
 To make sure they are up:
-```sh
+```console
 kubectl get pods
-
-NAME                      READY     STATUS    RESTARTS   AGE
-esp-controller-bbgqu      1/1       Running   0          5m
-esp-controller-wc8ae      1/1       Running   0          5m
-master-controller-wa5z8   1/1       Running   0          5m
-roxie-controller-hmvo5    1/1       Running   0          5m
-roxie-controller-x7ksh    1/1       Running   0          5m
-thor-controller-2sbe5     1/1       Running   0          5m
-thor-controller-p1q7f     1/1       Running   0          5m
-kubectl get pods 
-
+NAME                               READY   STATUS    RESTARTS   AGE
+dali                               1/1     Running   0          100s
+efs-provisioner-57965c4946-7w4b5   1/1     Running   0          2d14h
+esp-esp1-69b59769bd-hmzss          1/1     Running   0          98s
+hpcc-admin                         1/1     Running   0          101s
+roxie-roxie1-0                     1/1     Running   0          97s
+roxie-roxie1-1                     1/1     Running   0          68s
+roxie-roxie2-0                     1/1     Running   0          96s
+support-0                          1/1     Running   0          99s
+thor-thor1-0                       1/1     Running   0          94s
+thor-thor1-1                       1/1     Running   0          74s
+thormaster-thor1                   1/1     Running   0          95s
 ```
 
 The cluster should be automatically configured and started.
 To verify the status
-```sh
+```console
 bin/cluster_run.sh status
 
 Status of dali:
@@ -70,9 +79,9 @@ thor1           ( pid     4208 ) is running with 2 slave process(es) ...
 ```
 
 
-### Access ECLWatch ###
+## Access ECLWatch ###
 Get esp public ic:
-```sh
+```console
 kubectl get service
 
 NAME               TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)          AGE
@@ -86,9 +95,9 @@ svc-thor-thor1     ClusterIP      None            <none>                        
 ```
 ECLWatch URL: http://a88781525d33911e9a3780efce698321-1790757551.us-east-1.elb.amazonaws.com:8010
 
-### Scale up/down ###
+## Scale up/down ###
 Original roxie-roxie1 cluster has 2 instances. To increase it to 4 instances:
-```sh
+```console
 kubeclt scale --replicas 4 StatefulSet/roxie-roxie1
 
 kubeclt get pods
@@ -110,29 +119,29 @@ thormaster-thor1            1/1     Running   0          76m
 
 ```
 To scale it back
-```sh
-kubeclt scale --replicas 4 StatefulSet/roxie-roxie1
+```console
+kubeclt scale --replicas 2 StatefulSet/roxie-roxie1
 ```
 
 
-### Stop/Start Cluster ###
+## Stop/Start Cluster
 stop
-```ah
+```console
 bin/cluster-run stop
 ```
 start
-```ah
+```console
 bin/cluster-run start
 ```
 
 Get status
-```sh
+```console
 bin/cluster-run status
 
 ```
 
-### Delete Cluster ###
-```sh
+## Delete Cluster ###
+```console
 ./stop
 ```
 This does not delete volumes. Either use AWS Client or go to EC2 console to delete them.
