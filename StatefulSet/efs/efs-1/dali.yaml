@@ -10,7 +10,12 @@ spec:  # specification of the pod’s contents
     volumeMounts:
     - mountPath: "/var/lib/HPCCSystems/hpcc-data"
       name: dali-data
+    - mountPath: "/var/lib/HPCCSystems/hpcc-mirror"
+      name: dali-mirror
   volumes:
   - name: dali-data
     persistentVolumeClaim:
-      claimName: efs
+      claimName: efs-data
+  - name: dali-mirror
+    persistentVolumeClaim:
+      claimName: efs-mirror

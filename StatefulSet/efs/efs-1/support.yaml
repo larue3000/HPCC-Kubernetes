@@ -31,7 +31,7 @@ spec:  # specification of the pod’s contents
       - name: support
         image: "hpccsystems/platform"
         volumeMounts:
-        - mountPath: "/var/lib/HPCCSystems/hpcc-data"
+        - mountPath: "/var/lib/HPCCSystems"
           name: efs
   volumeClaimTemplates:
   - metadata:

@@ -15,7 +15,7 @@ spec:  # specification of the pod’s contents
   volumes:
   - name: dali-data
     persistentVolumeClaim:
-      claimName: efs
+      claimName: efs-data
   - name: dali-mirror
     persistentVolumeClaim:
-      claimName: efs
+      claimName: efs-mirror

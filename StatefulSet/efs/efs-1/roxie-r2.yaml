@@ -34,11 +34,33 @@ spec:  # specification of the pod’s contents
         - name: roxie-secure
           containerPort: 19876
         volumeMounts:
-        -  name: efs
+        -  name: efs-data
            mountPath: "/var/lib/HPCCSystems/hpcc-data"
+        -  name: efs-mirror
+           mountPath: "/var/lib/HPCCSystems/hpcc-mirror"
+        -  name: efs-queries
+           mountPath: "/var/lib/HPCCSystems/hpcc-queries"
   volumeClaimTemplates:
   - metadata:
-      name: efs
+      name: efs-data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: aws-efs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Mi
+  - metadata:
+      name: efs-mirror
+      annotations:
+        volume.beta.kubernetes.io/storage-class: aws-efs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Mi
+  - metadata:
+      name: efs-queries
       annotations:
         volume.beta.kubernetes.io/storage-class: aws-efs
     spec:
