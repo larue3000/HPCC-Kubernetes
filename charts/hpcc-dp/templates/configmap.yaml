@@ -22,4 +22,3 @@ data:
   roxie.properties: |
     default.roxieMulticastEnabled=false
   {{- end }}
-

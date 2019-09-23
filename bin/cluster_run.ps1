@@ -6,12 +6,12 @@ HPCC Systems Cluster Operations
 Get status/start/stop  HPCC Systems Cluster
 
  Usage:  cluster_run.ps1 -action <status/stop/start, default is status> -namespace <namespace, default is "default">
-             -component <cluster name, such as myroxie1, mydali> -pod-name <Pod name> 
-     
+             -component <cluster name, such as myroxie1, mydali> -pod-name <Pod name>
+
 .Example
 ./cluster_run.ps1 -action status
 
-. 
+.
 .LINK
 https://github.com/xwang2713/HPCC-Kubernetes
 
@@ -35,12 +35,12 @@ function get_cluster_status()
   {
       kubectl.exe exec $pod /etc/init.d/hpcc-init status
       ""
-  }  
+  }
 }
 
 function runHPCC ($a)
 {
-    if ( "$pod_name" -eq "" ) 
+    if ( "$pod_name" -eq "" )
     {
         return 1
     }
@@ -50,7 +50,7 @@ function runHPCC ($a)
       $cmd = "$cmd -c $comp_name"
    }
    $cmd = "$cmd $a"
-   "$cmd"  
+   "$cmd"
    iex "$cmd"
 
 }
@@ -86,29 +86,29 @@ switch ( $action )
        {
           get_cluster_status
        }
-       else 
+       else
        {
            runHPCC $action
        }
-       
+
    }
-   "start"  
-   { 
+   "start"
+   {
        if ( $component -ieq "configmgr")
        {
           kubectl.exe exec -it $admin_pod /opt/HPCCSystems/sbin/configmgr
        }
-       else 
+       else
        {
            stxxHPCC "start"
        }
    }
-   "stop"  
+   "stop"
    {
        stxxHPCC "stop"
    }
    "restart"
-    { 
+    {
         stxxHPCC "stop"
         stxxHPCC "start"
     }

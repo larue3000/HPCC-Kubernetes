@@ -3,8 +3,8 @@
 ### Prepqre ISTIO ###
 Follow https://istio.io/docs/setup/kubernetes/install/kubernetes/ to install Download ISTIO
 Unpack downloaded file
-export ISTIO_HOME=<ISTIO unpack directory> 
-Add ${ISTIO_HOME}/bin to PATH 
+export ISTIO_HOME=<ISTIO unpack directory>
+Add ${ISTIO_HOME}/bin to PATH
 
 start kubernetes and run bin/bootstrap-local.sh
 
@@ -44,12 +44,12 @@ kubectl.sh get service -n istio-system istio-ingressgateway
 ```
 It should be 31381 if istio-ingressgateway not changed
 
-Try http://<host ip>:31387 
+Try http://<host ip>:31387
 It should not work
 
 
 ### Allow ECLWatch access ###
-In network/ 
+In network/
 ```console
 kubectl.sh apply  -f eclwatch-gateway.yaml
 ``` 
@@ -60,6 +60,3 @@ In secuity/rbac
 ./apply-eclwatch.sh
 ```
 This will allow accessing eclwath. Run playground sample to verify it works.
-
-
-

@@ -3,7 +3,7 @@
 This is a simple stateless deployment scenario. It can be used to both local and real cloud, such as AWS.
 
 ## Prerequisities
-- Bootstrap 
+- Bootstrap
   AWS:
   ```console
   bin/bootstrap-aws.sh

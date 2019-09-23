@@ -7,6 +7,6 @@ spec:
     storage: 160Gi
   accessModes:
     - ReadWriteMany
-  awsElasticBlockStore: 
-    fsType: "ext4" 
+  awsElasticBlockStore:
+    fsType: "ext4"
     volumeID: "<VOLUME-ID>"

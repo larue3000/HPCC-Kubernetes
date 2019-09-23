@@ -30,7 +30,7 @@ spec:  # specification of the pod’s contents
         image: "hpccsystems/platform"
         volumeMounts:
         - mountPath: "/var/lib/HPCCSystems"
-          name: ebs          
+          name: ebs
   volumeClaimTemplates:
   - metadata:
       name: ebs

@@ -145,5 +145,3 @@ bin/cluster-run status
 ./stop
 ```
 This does not delete volumes. Either use AWS Client or go to EC2 console to delete them.
-
-

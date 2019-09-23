@@ -34,11 +34,11 @@ spec:  # specification of the pod’s contents
         app: esp-esp1
     spec:
       containers:
-        - name: esp-esp1 
+        - name: esp-esp1
           image: "hpccsystems/platform"
           ports:
           - name: eclwatch
-            containerPort: 8010 
+            containerPort: 8010
           - name: eclwatch-https
             containerPort: 18010
           - name: wsecl

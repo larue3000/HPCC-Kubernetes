@@ -4,7 +4,7 @@ metadata:
   name: svc-roxie-roxie1
   # namespace: default
   labels:
-    app: roxie-roxie1 
+    app: roxie-roxie1
 spec:
   selector:
     app: svc-roxie-roxie1

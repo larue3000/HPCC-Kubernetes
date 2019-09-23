@@ -14,4 +14,3 @@ spec:  # specification of the pod’s contents
   - name: dali-data
     persistentVolumeClaim:
       claimName: efs
-

@@ -7,4 +7,3 @@ roxie,@copyResources,true
 roxie,@roxieMulticastEnabled,false
 thor,@replicateOutputs,true
 esp,@method,htpasswd
-

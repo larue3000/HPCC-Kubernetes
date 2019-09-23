@@ -54,7 +54,7 @@ spec:
             volumeID: vol-4aa30797
             fsType: ext4
 ```
-Deploy nfs server: 
+Deploy nfs server:
 ```sh
 kubectl create -f nfs-server-rc.yaml
 ```
@@ -179,8 +179,3 @@ To access to check the volumes:
 kubectl exec -i -t <name> -- bash -il
 dk -h
 ```
-
-
-
-
-

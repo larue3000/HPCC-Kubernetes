@@ -13,7 +13,7 @@ We currently tested two cloud environments: [AWS/EKS](./aws/EKS/README.md) and [
 ## Bootstrap
 Bootstrap will grant access permission for Kubernetes APIs as well create configmap for environmet.xml configuration
 Depands on the Kubernetes environment configmap files may be different. Currently there is aws/configmap/hpcc for AWS environment and the other one is local/configmap/hpcc for local deployment.
-In bin directory 
+In bin directory
 ```sh
 # AWS
 bin/bootstrap-aws.sh
@@ -23,22 +23,22 @@ bin/bootstrap-local.sh
 or on Windows
 bootstrap.bat
 ```
-User can modify security/cluster_role.yaml and files under configmap/hpcc 
+User can modify security/cluster_role.yaml and files under configmap/hpcc
 
 ## Pod
 Deploy HPCC Systems Platform on single node
 Reference [README.md](Pod/README.md)
 
 ## Deployment
-Deploy HPCC Systems cluster with Deployment Pod definition. 
+Deploy HPCC Systems cluster with Deployment Pod definition.
 Reference [README.md](Deployment/dp-1/README.md)
 
 ## RelicationController
-Deploy HPCC Systems cluster with RelicationController Pod definition. 
+Deploy HPCC Systems cluster with RelicationController Pod definition.
 It is recommended to use "Deployment" instead
 
 ## [StatefulSet](StatefulSet/README.md)
-Deploy HPCC Systems cluster with StatefulSet Pod definition. 
+Deploy HPCC Systems cluster with StatefulSet Pod definition.
 It includs ebs and nfs examples
 Reference 
   . [EBS README.md](StatefulSet/ebs/ebs-1/README.md)
@@ -64,9 +64,8 @@ RBAC settings for Kubernetes environment
 AWS related settings
 
 ## elastic
-Filebeat, Metricbeat, etc example on local Kubernetes environment. 
+Filebeat, Metricbeat, etc example on local Kubernetes environment.
 Still in progress ...
 
 ## performance
 To do
-. 

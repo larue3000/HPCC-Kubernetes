@@ -20,10 +20,10 @@ spec:
             - mountPath: "/disk1"
               name: disk1
       volumes:
-        - name: nfs 
+        - name: nfs
           persistentVolumeClaim:
             claimName: nfs
-        - name: disk1 
+        - name: disk1
           awsElasticBlockStore:
             volumeID: vol-233c99fe
             fsType: ext4

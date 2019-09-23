@@ -20,12 +20,12 @@ https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
 ## Run EKS Cluster
 ### Create EKS cluster ###
 EKS cluster requires at two Available Zones (AZs).
-Two samples are provided: 
-. eks_1.sh 
+Two samples are provided:
+. eks_1.sh
 . eks_vpc.sh: this try to use existing VPC/Subnets but doesn't work. We are working with AWS support on it now
 
 ### Query EKS ###
-Query EKS cluster 
+Query EKS cluster
 ```sh
 eksctl get cluster
 ```
@@ -40,5 +40,3 @@ eksctl utils write-kubeconfig --name <cluster name>
 ./stop <cluster name>
 ```
 The default <cluster name> is "hpcc1" which is defined in start script.
-
-

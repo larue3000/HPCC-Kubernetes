@@ -6,7 +6,7 @@ metadata:
 spec:
   subjects:
   - properties:
-      source.namespace: "default" 
+      source.namespace: "default"
   roleRef:
     kind: ServiceRole
     name: "tcp-access"

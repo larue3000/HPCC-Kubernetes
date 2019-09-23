@@ -3,5 +3,3 @@
 
 #Software/Topology/Cluster[@name=\\\"thor\\\"]/ThorCluster,@process,thor123
 #Software/RoxieCluster/",roxieMulticastEnabled,false
-
-

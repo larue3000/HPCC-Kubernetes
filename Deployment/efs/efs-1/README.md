@@ -7,7 +7,7 @@ Current deployment has Sasha/DropZone in support Pod.
 Even EFS performance may not be good as EBS but EFS it is very convenient such as:
 - Don't need worry about cross AZz
 - Easy to share and re-use data
-- Don't need to worry to delete volume after deleting Pod. 
+- Don't need to worry to delete volume after deleting Pod.
 
 EFS is little expensive than EBS.
 
@@ -170,5 +170,3 @@ bin/cluster-run status
 ./stop
 ```
 This does not delete volumes. Either use AWS Client or go to EC2 console to delete them.
-
-

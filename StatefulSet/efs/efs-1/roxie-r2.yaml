@@ -4,7 +4,7 @@ metadata:
   name: svc-roxie-roxie2
   # namespace: default
   labels:
-    app: roxie-roxie2 
+    app: roxie-roxie2
 spec:
   selector:
     app: svc-roxie-roxie2
@@ -34,7 +34,7 @@ spec:  # specification of the pod’s contents
         - name: roxie-secure
           containerPort: 19876
         volumeMounts:
-        -  name: efs          
+        -  name: efs
            mountPath: "/var/lib/HPCCSystems/hpcc-data"
   volumeClaimTemplates:
   - metadata:

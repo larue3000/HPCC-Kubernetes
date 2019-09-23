@@ -6,7 +6,6 @@
 ## Tested deployments on local Kubernetes:
 - Pod
 - Deployment/dp-1
-- local/hpcc_dns 
+- local/hpcc_dns
 - istio
 - elastic
-
