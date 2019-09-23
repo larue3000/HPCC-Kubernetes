@@ -1,2 +1,0 @@
-kubectl.exe create configmap hpcc-config --from-file=hpcc/
-#kubectl.exe get configmap

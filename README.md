@@ -1,13 +1,13 @@
-# HPCC-Kubernetes
-## Reliable, Scaleble HPCC on Kubernetes
+# Kubernetes Playground for HPCC Systems Products
 
 This repo has several HPCC Systems Cluster examples on Kubernetes
 
 
 ## Prerequisites
 
-Install kubectl https://kubernetes.io/docs/tasks/tools/install-kubectl/
+For general kubectl installation reference https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
+We currently tested two cloud environments: [AWS/EKS](./aws/EKS/README.md) and [Local](./local/README.md)
 
 
 ## Bootstrap
@@ -52,6 +52,8 @@ Reference [README.md](istio/demo/README.md)
 
 Helm Charts for HPCC Systems Cluster (Experimental)
 
+Under construction
+
 ## local
 Local Kubernetes setup instruction
 
@@ -64,4 +66,7 @@ AWS related settings
 ## elastic
 Filebeat, Metricbeat, etc example on local Kubernetes environment. 
 Still in progress ...
+
+## performance
+To do
 . 
