@@ -1,5 +1,5 @@
 # Deploy Cluster with ReplicationController
-"Deployment" is prefered 
+"Deployment" is prefered
 
 ## Start a Cluster
 ```console

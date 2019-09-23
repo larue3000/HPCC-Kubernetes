@@ -11,4 +11,3 @@ spec:
     - key: "destination.labels[app]"
       values: ["esp-e1"]
     #  values: ["esp-e1", "roxie-r1", "support"]
-

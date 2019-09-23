@@ -1,6 +1,6 @@
 # Deploy Dali/Sasha/DropZone/Roxie/Thor Pods as StatefulSet/EFS
 
-Current deployment has Sasha/DropZone in support Pod.  
+Current deployment has Sasha/DropZone in support Pod.
 Attach ReadWriteMany EFS to Pods doesn't need StatefulSet. See Deployment/efs/efs-1/README.md. But for ReadWriteOnce EFS StatefulSet is required which is this setup about.
 
 
@@ -69,7 +69,7 @@ To check clustr status:
 ```console
 bin/cluster_run.sh status
 ```
-## Access EclWatch 
+## Access EclWatch
 Get esp public ip:
 ```console
 kubectl get services

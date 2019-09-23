@@ -13,7 +13,7 @@ cd ${ISTIO_HOME}
 
 echo "Install all the Istio Custom Resource Definitions (CRDs)"
 for i in install/kubernetes/helm/istio-init/files/crd*yaml
-do 
+do
   ${KUBECTL} apply -f $i
 done
 
@@ -30,5 +30,3 @@ ${KUBECTL} get svc -n istio-system
 #echo "Label namespace as istio-injection-enabled"
 echo "${KUBECTL} label namespace  ${namespace} istio-injection=enabled"
 #${KUBECTL} label namespace  ${namespace} istio-injection=enabled
-
-

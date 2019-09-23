@@ -13,16 +13,16 @@ kubectl create -f hpcc.yaml
 For single node deployment HPCC is not started. you can start it as:
 ```sh
 kubectl exec  hpcc -- /etc/init.d/hpcc-init start
-Starting mydafilesrv ...       [   OK    ]   
-Starting mydali ...            [   OK    ]   
-Starting mydfuserver ...       [   OK    ]   
-Starting myeclagent ...        [   OK    ]   
-Starting myeclccserver ...     [   OK    ]   
-Starting myeclscheduler ...    [   OK    ]   
-Starting myesp ...             [   OK    ]   
-Starting myroxie ...           [   OK    ]   
-Starting mysasha ...           [   OK    ]   
-Starting mythor ...            [   OK    ] 
+Starting mydafilesrv ...       [   OK    ]
+Starting mydali ...            [   OK    ]
+Starting mydfuserver ...       [   OK    ]
+Starting myeclagent ...        [   OK    ]
+Starting myeclccserver ...     [   OK    ]
+Starting myeclscheduler ...    [   OK    ]
+Starting myesp ...             [   OK    ]
+Starting myroxie ...           [   OK    ]
+Starting mysasha ...           [   OK    ]
+Starting mythor ...            [   OK    ]
 ```
 You also can access the contain to run commands:
 ```sh

@@ -12,7 +12,7 @@ spec:  # specification of the pod’s contents
       volumeMounts:
         - mountPath: /etc/hpcc_config_map
           name: env-config
-      command: ["/opt/hpcc-tools/run"] 
+      command: ["/opt/hpcc-tools/run"]
       args: ["-e", "kube"]
       #args: ["-D"]
   volumes:

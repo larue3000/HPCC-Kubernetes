@@ -18,4 +18,3 @@ eksctl create cluster \
 	--tags "owner_email=xiaoming.wang@lexisnexis.com" \
 	--tags "support_email=xiaoming.wang@lexisnexis.com" \
 	--tags "product=hpccsystems,project=hpcc builds,service=ecs"
-

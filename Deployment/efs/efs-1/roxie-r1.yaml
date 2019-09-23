@@ -21,10 +21,9 @@ spec:  # specification of the pod’s contents
         - name: roxie-secure
           containerPort: 19876
         volumeMounts:
-        -  name: roxie1-efs-pvc          
+        -  name: roxie1-efs-pvc
            mountPath: "/var/lib/HPCCSystems/hpcc-data"
       volumes:
       - name: roxie1-efs-pvc
         persistentVolumeClaim:
           claimName: efs
-  

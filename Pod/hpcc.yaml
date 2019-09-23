@@ -10,8 +10,8 @@ spec:  # specification of the pod’s contents
       ports:
       - name: eclwatch
         containerPort: 8010
-      - name: eclwatch-https              
-        containerPort: 18010    
+      - name: eclwatch-https
+        containerPort: 18010
       - name: wsecl
         containerPort: 8002
       - name: wsecl-https

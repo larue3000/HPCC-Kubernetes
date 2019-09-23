@@ -9,4 +9,3 @@ spec:
     constrains:
     - key: "destination.port"
       values: ["22"]
-
