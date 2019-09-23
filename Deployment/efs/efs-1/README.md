@@ -11,6 +11,14 @@ Even EFS performance may not be good as EBS but EFS it is very convenient such a
 
 EFS is little expensive than EBS.
 
+## Persistent Volumes
+One EFS server is used for persistent storage. 
+There are four type persistent volume claims:
+  - efs: /var/lib/HPCCSystems (support node and possible for dali node)
+  - efs-data: /var/lib/HPCCSystems/hpcc-data  (dali/roxie/thor)
+  - efs-mirror: /var/lib/HPCCSysterms/hpcc-mirror (dali/roxie/thor)
+  - efs-queries: /var/lib/HPCCSystems/queries (roxie/thor)
+
 ## Performance
 to do (compare EFS and EBS)
 
