@@ -10,7 +10,16 @@ spec:
   - protocol: TCP
     port: 8010
     targetPort: 8010
+    name: eclwatch
     #nodePort: 31000  #local
+  - protocol: TCP
+    port: 8002
+    targetPort: 8002
+    name: wsecl
+  - protocol: TCP
+    port: 8510
+    targetPort: 8510
+    name: wssql
   type:
     LoadBalancer
     #NodePort   #local
@@ -39,15 +48,7 @@ spec:  # specification of the pod’s contents
         ports:
         - name: eclwatch
           containerPort: 8010
-        - name: eclwatch-https
-          containerPort: 18010
         - name: wsecl
           containerPort: 8010
-        - name: wsecl-https
-          containerPort: 18010
         - name: wssql
           containerPort: 8510
-        - name: wsssql-https
-          containerPort: 18510
-        - name: confmgr
-          containerPort: 8015

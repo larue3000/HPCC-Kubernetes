@@ -7,6 +7,7 @@ ${KUBECTL} delete -f admin.yaml
 ${KUBECTL} delete -f dali.yaml
 ${KUBECTL} delete -f support.yaml
 ${KUBECTL} delete -f esp-e1.yaml
+#${KUBECTL} delete -f esp-e1-https.yaml
 ${KUBECTL} delete -f roxie-r1.yaml
 ${KUBECTL} delete -f roxie-r2.yaml
 ${KUBECTL} delete -f thormaster-t1.yaml

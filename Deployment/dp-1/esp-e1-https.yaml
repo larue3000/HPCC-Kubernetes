@@ -8,18 +8,17 @@ spec:
     app: esp-esp1
   ports:
   - protocol: TCP
-    port: 8010
-    targetPort: 8010
-    name: eclwatch
-    #nodePort: 31000  #local
+    port: 18010
+    targetPort: 18010
+    name: eclwatch-https
   - protocol: TCP
-    port: 8002
-    targetPort: 8002
-    name: wsecl
+    port: 18002
+    targetPort: 18002
+    name: wsecl-https
   - protocol: TCP
-    port: 8510
-    targetPort: 8510
-    name: wssql
+    port: 18510
+    targetPort: 18510
+    name: wssql-https
   type:
     LoadBalancer
     #NodePort   #local
@@ -43,12 +42,12 @@ spec:  # specification of the pod’s contents
         app: esp-esp1
     spec:
       containers:
-      - name: esp-esp1
-        image: "hpccsystems/platform"
-        ports:
-        - name: eclwatch
-          containerPort: 8010
-        - name: wsecl
-          containerPort: 8002
-        - name: wssql
-          containerPort: 8510
+        - name: esp-esp1
+          image: "hpccsystems/platform"
+          ports:
+          - name: eclwatch-https
+            containerPort: 18010
+          - name: wsecl-https
+            containerPort: 18002
+          - name: wssql-https
+            containerPort: 18510

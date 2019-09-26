@@ -1,4 +1,21 @@
 apiVersion: v1
+kind: Service
+metadata:
+  name: configmgr
+#  namespace: default
+spec:
+  selector:
+    app: hpcc-admin
+  ports:
+  - protocol: TCP
+    port: 8015
+    targetPort: 8015
+    name: configmgr
+  type:
+    LoadBalancer
+    #NodePort   #local
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: hpcc-admin
@@ -9,6 +26,7 @@ spec:  # specification of the pod’s contents
     image: "hpccsystems/hpcc-admin"
     ports:
       - containerPort: 8010
+        name: configmgr
     volumeMounts:
       - mountPath: /etc/hpcc_config_map
         name: env-config
