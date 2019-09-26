@@ -10,7 +10,16 @@ spec:
   - protocol: TCP
     port: 8010
     targetPort: 8010
-    nodePort: 31000
+    #nodePort: 31000
+    name: eclwatch
+  - protocol: TCP
+    port: 8002
+    targetPort: 8002
+    name: wsecl
+  - protocol: TCP
+    port: 8510
+    targetPort: 8510
+    name: wssql
   type:
     #LoadBalancer
     NodePort
