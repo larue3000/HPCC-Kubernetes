@@ -12,6 +12,8 @@ Compare EBS with EFS, EBS supports to have better performance but when cluster d
 ```console
 bin/bootstrap-aws.sh
 ```
+"bootstrap-aws.sh" includes apply Kubernetes API RBAC roles and set configmap "hpcc-config" for environment.xml generation.  If configmap "hpcc-config" not set user can provide configmap under ./hpcc-config and apply it in ./start script. See [aws/configmap/README.md](../../../aws/configmap/README.md) for more detail about configmap settings
+
 
 ## Deploy HPCC Systems Cluster
 ```console

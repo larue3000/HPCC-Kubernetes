@@ -19,6 +19,7 @@ metadata:
 spec:  # specification of the pod’s contents
   serviceName: "svc-support"
   replicas: 1
+  podManagementPolicy: "Parallel"  # the default is "OrderedReady"
   selector:
     matchLabels:
       app: svc-support

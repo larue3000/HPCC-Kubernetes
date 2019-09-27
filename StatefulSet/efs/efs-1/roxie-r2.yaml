@@ -17,6 +17,7 @@ metadata:
 spec:  # specification of the pod’s contents
   serviceName: "svc-roxie-roxie2"
   replicas: 1
+  podManagementPolicy: "Parallel"  # the default is "OrderedReady"
   selector:
     matchLabels:
       app: svc-roxie-roxie2

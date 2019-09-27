@@ -2,6 +2,9 @@
 WORK_DIR=$(dirname $0)
 . ${WORK_DIR}/../../../bin/common
 
+# Apply configmap "hpcc-config" if bootstrap with bin/bootstrap-rbac-only.sh
+#${KUBECTLTL} create configmap hpcc-config  --from-file=${WORK_DIR}/hpcc-config/
+
 ${KUBECTL} create -f admin.yaml
 ${KUBECTL} create -f dali.yaml
 ${KUBECTL} create -f support.yaml

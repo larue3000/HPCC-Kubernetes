@@ -17,6 +17,7 @@ metadata:
 spec:  # specification of the pod’s contents
   serviceName: "svc-thor-thor1"
   replicas: 2
+  podManagementPolicy: "Parallel"  # the default is "OrderedReady"
   selector:
     matchLabels:
       app: svc-thor-thor1

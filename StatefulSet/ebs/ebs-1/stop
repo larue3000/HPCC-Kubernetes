@@ -17,3 +17,5 @@ kubectl get pvc | grep "^ebs-"| cut -d' ' -f1 | while read name
 do
   ${KUBECTL} delete pvc $name
 done
+
+#${KUBECTL} delete configmap hpcc-config

@@ -18,6 +18,13 @@ On Windows
 ```console
 bootstrap.bat
 ```
+### Apply RBAC only
+Grant Kubernetes API roles only
+```console
+./bootstrap-rbac-only.sh
+```
+User need apply ConfigMap for environment.xml in the start-up cluster script
+
 
 ## Start/Stop/Get Status
 ### On Unix
