@@ -11,9 +11,8 @@ spec:
     targetPort: 8015
     #nodePort: 31000
     name: configmgr
-  type:
+  type: NodePort
     #LoadBalancer
-    NodePort
 
 ---
 apiVersion: v1

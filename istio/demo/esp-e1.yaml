@@ -14,9 +14,8 @@ spec:
     port: 8010
     #targetPort: 8010
     #nodePort: 31000  #local
-  type:
+  type: NodePort   #local
     #LoadBalancer
-    NodePort   #local
 ---
 apiVersion: apps/v1
 kind: Deployment

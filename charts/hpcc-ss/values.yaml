@@ -1,16 +1,7 @@
 # Default values for hpcc-dp.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-global:
-  EFS:
-    Region: us-east-1
-    Id: fs-9ba53979
-    Server: fs-9ba53979.efs.us-east-1.amazonaws.com
-    ClaimName:
-      Default: efs
-      Data: efs-data
-      Mirror: efs-mirror
-      Queries: efs-queries
+#global:
 
 Hpccsystems:
   Platform:
@@ -18,10 +9,14 @@ Hpccsystems:
 
 Cloud:
   Type: aws # local, ...
+
+
+Persistence:
+  Config:
+    Enabled: true
+    StorageClass: gp2
  
-AWS:
-  EFS:
-    Enabled: false
+#AWS:
 
 NameSpace: 
   Name: default #hpcc-systems
@@ -103,12 +98,14 @@ Roxie:
   LocalServiceType: NodePort
   Cluster1:
     Name: roxie1
-    ServiceName: roxie-roxie1
+    ServiceName: svc-roxie-roxie1
     Replicas: 2
     Server:
       Name: server
       Port: 9876
       SecurePort: 19876
+    Volume:
+      Size: 40Gi
   Cluster2:
     Name: roxie2
     ServiceName: roxie-roxie2
@@ -116,12 +113,20 @@ Roxie:
     Server:
       Port: 9876
       SecurePort: 19876
+    Volume:
+      Size: 40Gi
 
 Dali:
   RestartPolicy: Always
+  Volume:
+    Size: 40Gi
 
 Support:
   Replicas: 1
+  Volume:
+    Size: 40Gi
+  ServiceName: svc-support
+  PodManagementPolicy: Parallel
 
 ThorMaster:
   CompName: thormaster
@@ -130,7 +135,13 @@ ThorMaster:
 Thor:
   Cluster1:
     Name: thor1
+    ServiceName: svc-thor-thor1
     Replicas: 2
+    Volume:
+      Size: 40Gi
   Cluster2:
     Name: thor2
+    ServiceName: svc-thor-thor2
     Replicas: 1
+    Volume:
+      Size: 40Gi

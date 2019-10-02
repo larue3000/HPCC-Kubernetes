@@ -20,9 +20,8 @@ spec:
     port: 8510
     targetPort: 8510
     name: wssql
-  type:
+  type: NodePort
     #LoadBalancer
-    NodePort
 ---
 apiVersion: v1
 kind: ReplicationController

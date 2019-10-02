@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: roxie-{{ .Values.Roxie.Cluster1.Name }}
+  name: roxie-{{ .Values.Roxie.Cluster2.Name }}
   namespace: {{ .Values.NameSpace.Name }}
   labels:
-    app: roxie-{{ .Values.Roxie.Cluster1.Name }}
+    app: roxie-{{ .Values.Roxie.Cluster2.Name }}
 spec:  # specification of the pod’s contents
-  replicas: {{ .Values.Roxie.Cluster1.Replicas }}
+  replicas: {{ .Values.Roxie.Cluster2.Replicas }}
   selector:
     matchLabels:
-      app: roxie-{{ .Values.Roxie.Cluster1.Name }}
-      cluster: {{ .Values.Roxie.Cluster1.Name }}
+      app: roxie-{{ .Values.Roxie.Cluster2.Name }}
+      cluster: {{ .Values.Roxie.Cluster2.Name }}
   template:
     metadata:
       labels:
-        app: roxie-{{ .Values.Roxie.Cluster1.Name }}
-        cluster: {{ .Values.Roxie.Cluster1.Name }}
+        app: roxie-{{ .Values.Roxie.Cluster2.Name }}
+        cluster: {{ .Values.Roxie.Cluster2.Name }}
     spec:
       containers:
-      - name:  roxie-{{ .Values.Roxie.Cluster1.Name }}
+      - name:  roxie-{{ .Values.Roxie.Cluster2.Name }}
         image: {{ .Values.Hpccsystems.Platform.Image }}
         ports:
-        - name: {{ .Values.Roxie.Cluster1.Server.Name }}
+        - name: {{ .Values.Roxie.Cluster2.Server.Name }}
           {{- if .Values.secure }}
-          containerPort: {{ .Values.Roxie.Cluster1.Server.SecurePort }}
+          containerPort: {{ .Values.Roxie.Cluster2.Server.SecurePort }}
           {{- else }}
-          containerPort: {{ .Values.Roxie.Cluster1.Server.Port }}
+          containerPort: {{ .Values.Roxie.Cluster2.Server.Port }}
           {{- end }}
         {{- if .Values.AWS.EFS.Enabled }}
         volumeMounts:

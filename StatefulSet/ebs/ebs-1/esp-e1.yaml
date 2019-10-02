@@ -20,9 +20,8 @@ spec:
     port: 8510
     targetPort: 8510
     name: wssql
-  type:
-    LoadBalancer
-    #NodePort   #local
+  type: LoadBalancer
+        #NodePort   #local
 ---
 apiVersion: apps/v1
 kind: Deployment

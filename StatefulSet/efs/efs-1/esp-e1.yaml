@@ -23,9 +23,8 @@ spec:
     port: 8015
     targetPort: 8015
     name: confmgr
-  type:
-    LoadBalancer
-    #NodePort   #local
+  type: LoadBalancer 
+        #NodePort   #local
 ---
 apiVersion: apps/v1
 kind: Deployment

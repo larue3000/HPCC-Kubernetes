@@ -10,9 +10,8 @@ spec:
     port: 8015
     targetPort: 8015
     name: configmgr
-  type:
-    LoadBalancer
-    #NodePort
+  type: LoadBalancer
+        #NodePort
 ---
 apiVersion: v1
 kind: Pod

@@ -34,7 +34,6 @@ spec:  # specification of the pod’s contents
           containerPort: 9876
         - name: roxie-secure
           containerPort: 19876
-
         volumeMounts:
         - mountPath: "/var/lib/HPCCSystems"
           name: ebs
