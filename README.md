@@ -50,9 +50,11 @@ Reference [README.md](istio/demo/README.md)
 
 ## charts
 
-Helm Charts for HPCC Systems Cluster (Experimental)
+[Helm Charts for HPCC Systems Cluster](charts/README.md) 
+Mainly two charts:
+- hpcc-dp: deploy a cluster with Deployments/EFS.  EFS can be turn off so the cluster can be deployed in local environment 
+- hpcc-ss: deploy a cluster with StatefulSets/EBS
 
-Under construction
 
 ## local
 Local Kubernetes setup instruction
